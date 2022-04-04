@@ -12,6 +12,7 @@ namespace SpaceGame
         List <GameObject> _armyOfEnemies;
         List <GameObject> _ground;
         List <GameObject> _playerProgectile;
+        GameSettings _gameSettings;
         
         GameObject _playerShip;
 
@@ -22,11 +23,20 @@ namespace SpaceGame
 
         }
 
-        public static Scene GetScene()
+        private Scene(GameSettings gameSettings)
+        {
+            _gameSettings = gameSettings;
+            _armyOfEnemies = new EnemyShipFactory(_gameSettings).GetArmyOfEnemyShips();
+            _ground = 
+            _playerShip = 
+            _playerProgectile =
+        }
+
+        public static Scene GetScene(GameSettings gameSettings)
         {
             if(_scene == null)
             {
-                
+                _scene = new Scene(gameSettings);
             }
             return _scene;
         }
