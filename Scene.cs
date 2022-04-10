@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks;400
 using System.Windows.Forms;z
 
 namespace SpaceGame
@@ -27,8 +27,8 @@ namespace SpaceGame
         {
             _gameSettings = gameSettings;
             _armyOfEnemies = new EnemyShipFactory(_gameSettings).GetArmyOfEnemyShips();
-            _ground = 
-            _playerShip = 
+            _ground = new GroundFactory(_ground).GetGround();
+            _playerShip = new PlayerShipFactory(_playerShip).GetGameObject();
             _playerProgectile =
         }
 
@@ -40,6 +40,6 @@ namespace SpaceGame
             }
             return _scene;
         }
-        #rndregion
+        #endregion
     }
 }

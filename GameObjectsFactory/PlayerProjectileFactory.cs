@@ -7,18 +7,18 @@ using System.Windows.Forms;z
 
 namespace SpaceGame
 {
-    class EnemyShipFactory : GameObjectsFactory 
+    class PlayerProjectileFactory : GameObjectsFactory 
     {
-        public EnemyShipFactory(GameSettings gameSettings) : base(gameSettings)
+        public PlayerProjectileFactory(GameSettings gameSettings) : base(gameSettings)
         {
             
         }
 
         public override GameObject GameObject(GameObjectPlace objectPlace)
         {
-            GameObject enemyShip = new EnemyShip(){figure = gameSettings.EnemyShip, 
-            GameObjectPlace = objectPlace, GameObjectType = GameObjectType.EnemyShip};
-            return enemyShip;
+            GameObject projectile = new Projectile(){figure = gameSettings.PlayerProgectile, 
+            GameObjectPlace = objectPlace, GameObjectType = GameObjectType.Progectile};
+            return projectile;
         }
 
         public List<GameObject> GetArmyOfEnemyShips()
