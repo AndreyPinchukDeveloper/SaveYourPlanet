@@ -9,12 +9,12 @@ namespace SpaceGame
 {
     class Scene
     {
-        List <GameObject> _armyOfEnemies;
-        List <GameObject> _ground;
-        List <GameObject> _playerProgectile;
+        public List <GameObject> armyOfEnemies;
+        public List <GameObject> ground;
+        public List <GameObject> playerProjectile;
         GameSettings _gameSettings;
         
-        GameObject _playerShip;
+        public GameObject playerShip;
 
         #region Singleton
         private static Scene _scene;
@@ -26,10 +26,9 @@ namespace SpaceGame
         private Scene(GameSettings gameSettings)
         {
             _gameSettings = gameSettings;
-            _armyOfEnemies = new EnemyShipFactory(_gameSettings).GetArmyOfEnemyShips();
-            _ground = new GroundFactory(_ground).GetGround();
-            _playerShip = new PlayerShipFactory(_playerShip).GetGameObject();
-            _playerProgectile =
+            armyOfEnemies = new EnemyShipFactory(_gameSettings).GetArmyOfEnemyShips();
+            ground = new GroundFactory(ground).GetGround();
+            playerShip = new PlayerShipFactory(playerShip).GetGameObject();
         }
 
         public static Scene GetScene(GameSettings gameSettings)

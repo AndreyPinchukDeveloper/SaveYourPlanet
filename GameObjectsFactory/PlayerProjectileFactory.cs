@@ -14,28 +14,18 @@ namespace SpaceGame
             
         }
 
-        public override GameObject GameObject(GameObjectPlace objectPlace)
+        public override GameObject GetGameObject(GameObjectPlace objectPlace)
         {
-            GameObject projectile = new Projectile(){figure = gameSettings.PlayerProgectile, 
-            GameObjectPlace = objectPlace, GameObjectType = GameObjectType.Progectile};
+            GameObject projectile = new Projectile(){figure = gameSettings.PlayerProgectile, GameObjectPlace = objectPlace, GameObjectType = GameObjectType.Projectile};
             return projectile;
         }
 
-        public List<GameObject> GetArmyOfEnemyShips()
+        public GameObject GetGameObject()
         {
-            List<GameObject> army = new List<GameObject>();
-            int startX = GameSettings.EnemyXCoordinateStart;
-            int startY = GameSettings.EnemyYCoordinateStart;
-            for(int y = 0; y < GameSettings.CountOfEnemyRows; y++)
-            {
-                for(int x = 0; x < GameSettings.CountOfEnemyColls; x++)
-                {
-                    GameObjectPlace objectPlace = new GameObjectPlace(){ XCoordinate = startX + x, YCoordinate = startY + y};
-                    GameObject enemyShip = GetGameObject(objectPlace);
-                    army.Add(enemyShip);
-                }
-            }
-            return army;
+
+            GameObjectPlace place = new GameObjectPlace() { XCoordinate = GameSettings.PlayerXStartCoordinate, YCoordinate = GameSettings.PlayerYStartCoordinate };
+            GameObject gameObject = GetGameObject(place);
+            return gameObject;
         }
     }
 }
