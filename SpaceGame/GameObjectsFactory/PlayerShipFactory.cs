@@ -3,27 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;z
 
 namespace SpaceGame
 {
-    class PlayerShipFactory : GameObjectsFactory 
+    class PlayerShipFactory : GameObjectsFactory
     {
         public PlayerShipFactory(GameSettings gameSettings) : base(gameSettings)
         {
-            
+
         }
 
         public override GameObject GetGameObject(GameObjectPlace objectPlace)
         {
-            GameObject playerObject = new Player(){figure = gameSettings.PlayerShip, GameObjectPlace = objectPlace, GameObjectType = GameObjectType.PlayerShip};
+            GameObject playerObject = new Player() 
+            { 
+                Figure = GameSettings.PlayerShip, 
+                GameObjectPlace = objectPlace, 
+                GameObjectType = GameObjectType.Player 
+            };
             return playerObject;
         }
 
         public GameObject GetGameObject()
         {
 
-            GameObjectPlace place = new GameObjectPlace() { XCoordinate = GameSettings.PlayerXStartCoordinate, YCoordinate = GameSettings.PlayerYStartCoordinate };
+            GameObjectPlace place = new GameObjectPlace() 
+            { 
+                XCoordinate = GameSettings.PlayerXCoordinateStart, 
+                YCoordinate = GameSettings.PlayerYCoordinateStart 
+            };
             GameObject gameObject = GetGameObject(place);
             return gameObject;
         }

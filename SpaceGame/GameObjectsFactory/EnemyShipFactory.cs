@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;z
 
 namespace SpaceGame
 {
-    class EnemyShipFactory : GameObjectsFactory 
+    class EnemyShipFactory : GameObjectsFactory
     {
         public EnemyShipFactory(GameSettings gameSettings) : base(gameSettings)
         {
-            
+
         }
 
-        public override GameObject GameObject(GameObjectPlace objectPlace)
+        public override GameObject GetGameObject(GameObjectPlace objectPlace)
         {
-            GameObject enemyShip = new EnemyShip(){figure = gameSettings.EnemyShip, 
-            GameObjectPlace = objectPlace, GameObjectType = GameObjectType.EnemyShip};
+            GameObject enemyShip = new EnemyShip()
+            {
+                Figure = GameSettings.EnemyShip,
+                GameObjectPlace = objectPlace,
+                GameObjectType = GameObjectType.EnemyShip
+            };
             return enemyShip;
         }
 
@@ -26,11 +29,11 @@ namespace SpaceGame
             List<GameObject> army = new List<GameObject>();
             int startX = GameSettings.EnemyXCoordinateStart;
             int startY = GameSettings.EnemyYCoordinateStart;
-            for(int y = 0; y < GameSettings.CountOfEnemyRows; y++)
+            for (int y = 0; y < GameSettings.CountOfEnemyRows; y++)
             {
-                for(int x = 0; x < GameSettings.CountOfEnemyColls; x++)
+                for (int x = 0; x < GameSettings.CountOfEnemyColls; x++)
                 {
-                    GameObjectPlace objectPlace = new GameObjectPlace(){ XCoordinate = startX + x, YCoordinate = startY + y};
+                    GameObjectPlace objectPlace = new GameObjectPlace() { XCoordinate = startX + x, YCoordinate = startY + y };
                     GameObject enemyShip = GetGameObject(objectPlace);
                     army.Add(enemyShip);
                 }

@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;400
-using System.Windows.Forms;z
+using System.Threading.Tasks;
 
 namespace SpaceGame
 {
     class Scene
     {
-        public List <GameObject> armyOfEnemies;
-        public List <GameObject> ground;
-        public List <GameObject> playerProjectile;
+        public List<GameObject> armyOfEnemies;
+        public List<GameObject> ground;
+        public List<GameObject> playerProjectile;
         GameSettings _gameSettings;
-        
+
         public GameObject playerShip;
 
         #region Singleton
@@ -27,13 +26,14 @@ namespace SpaceGame
         {
             _gameSettings = gameSettings;
             armyOfEnemies = new EnemyShipFactory(_gameSettings).GetArmyOfEnemyShips();
-            ground = new GroundFactory(ground).GetGround();
-            playerShip = new PlayerShipFactory(playerShip).GetGameObject();
+            ground = new GroundFactory(_gameSettings).GetGround();
+            playerShip = new PlayerShipFactory(_gameSettings).GetGameObject();
+            playerProjectile = new List<GameObject>();
         }
 
         public static Scene GetScene(GameSettings gameSettings)
         {
-            if(_scene == null)
+            if (_scene == null)
             {
                 _scene = new Scene(gameSettings);
             }

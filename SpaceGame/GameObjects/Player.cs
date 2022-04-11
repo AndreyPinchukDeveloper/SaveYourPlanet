@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;z
 
 namespace SpaceGame
 {
-    class GameObjectPlace
+    class Player : GameObject
     {
-        public int XCoordinate{ get; set;}
 
-        public int YCoordinate{get; set;}
-
-        
     }
 }

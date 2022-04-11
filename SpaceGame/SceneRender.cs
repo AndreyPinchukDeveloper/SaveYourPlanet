@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;z
 
 namespace SpaceGame
 {
@@ -13,13 +12,13 @@ namespace SpaceGame
         int _screenHeight;
         char[,] _screenMatrix;
 
-        public SceneRender(GameSettings game gameSettings)
+        public SceneRender(GameSettings gameSettings)
         {
-            _screenWidth = gameSettings.ConsoleWidth + 1;
-            _screenHeight = gameSettings.ConsoleHeight + 1;
-            _screenMatrix = new char [gameSettings.ConsoleWidth, gameSettings.ConsoleHeight];
+            _screenWidth = gameSettings.ConsoleWidth;
+            _screenHeight = gameSettings.ConsoleHeight;
+            _screenMatrix = new char[gameSettings.ConsoleHeight, gameSettings.ConsoleWidth];
             Console.WindowHeight = gameSettings.ConsoleHeight;
-            Console.BufferWidth = gameSettings.ConsoleWidth;
+            Console.WindowWidth = gameSettings.ConsoleWidth;
             SetCursorPosition();
         }
 
@@ -29,14 +28,15 @@ namespace SpaceGame
             AddListForRendering(scene.armyOfEnemies);
             AddListForRendering(scene.ground);
             AddListForRendering(scene.playerProjectile);
-            AddListForRendering(scene.playerShip);
-            StringBuilder StringBuilder = new StringBuilder();
+            AddGameObjectForRendering(scene.playerShip);
+              
+            StringBuilder stringBuilder = new StringBuilder();
 
-            for(int y = 0; y < _screenHeight; y++)
+            for (int y = 0; y < _screenHeight; y++)
             {
-                for(int x = 0; x < _screenWidth; y++)
+                for (int x = 0; x < _screenWidth; x++)
                 {
-                    stringBuilder.Append(_screenMatrix[y,x]);
+                    stringBuilder.Append(_screenMatrix[y, x]);
                 }
                 stringBuilder.Append(Environment.NewLine);
             }
@@ -50,19 +50,19 @@ namespace SpaceGame
             int x = gameObject.GameObjectPlace.XCoordinate;
             int y = gameObject.GameObjectPlace.YCoordinate;
 
-            if(x < _screenMatrix.GetLength(0) && y < _screenMatrix.GetLength(1))
+            if (y < _screenMatrix.GetLength(0) && x < _screenMatrix.GetLength(1))
             {
-                _screenMatrix[x,y] = gameObject.Figure;
+                _screenMatrix[y, x] = gameObject.Figure;
             }
             else
             {
-                _screenMatrix[x,y] = ' ';
+                //_screenMatrix[y, x] = ' ';
             }
         }
 
         public void AddListForRendering(List<GameObject> gameObjects)
         {
-            foreach(GameObject gameObject in gameObjects)
+            foreach (GameObject gameObject in gameObjects)
             {
                 AddGameObjectForRendering(gameObject);
             }
@@ -71,7 +71,23 @@ namespace SpaceGame
         public void SetCursorPosition()
         {
             Console.CursorVisible = false;
-            Console.SetCursorPosition (0,0);
+            Console.SetCursorPosition(0, 0);
+        }
+
+        public void ClearScreen()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (int y = 0; y < _screenHeight; y++)
+            {
+                for (int x = 0; x < _screenWidth; x++)
+                {
+                    stringBuilder.Append(' ' );
+                }
+                stringBuilder.Append(Environment.NewLine);
+            }
+
+            Console.WriteLine(stringBuilder.ToString());
         }
 
     }
