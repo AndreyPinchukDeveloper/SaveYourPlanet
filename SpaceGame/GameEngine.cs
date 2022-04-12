@@ -42,14 +42,54 @@ namespace SpaceGame
         #endregion
 
         public void Run()
-        { 
+        {
+            int enemyArmyCounter = 0;
+
             do
             {
                 _sceneRender.ClearScreen();
                 _sceneRender.Render(_scene);
                 Thread.Sleep(_gameSettings.SpeedOfFrame);
 
+                if (enemyArmyCounter==_gameSettings.EnemySpeed)
+                {
+                    CalculateEnemiesMove();
+                    enemyArmyCounter = 0;
+                }
+                enemyArmyCounter++;
+                
+
             } while (_isNotOver);
+        }
+
+        public void CalculateMovePlayerLeft()
+        {
+            if (_scene.playerShip.GameObjectPlace.XCoordinate > 1)
+            {
+                _scene.playerShip.GameObjectPlace.XCoordinate--;
+            }
+        }
+
+        public void CalculateMovePlayerRight()
+        {
+            if (_scene.playerShip.GameObjectPlace.XCoordinate < _gameSettings.ConsoleWidth)
+            {
+                _scene.playerShip.GameObjectPlace.XCoordinate++;
+            }
+        }
+
+        public void CalculateEnemiesMove()
+        {
+            for (int i = 0; i < _scene.armyOfEnemies.Count; i++)
+            {
+                GameObject enemyArmy = _scene.armyOfEnemies[i];
+                enemyArmy.GameObjectPlace.YCoordinate++;
+
+                if (enemyArmy.GameObjectPlace.YCoordinate == _scene.playerShip.GameObjectPlace.YCoordinate)
+                {
+                    _isNotOver = false;
+                }
+            }
         }
     }
 }
