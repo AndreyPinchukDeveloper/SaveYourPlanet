@@ -24,6 +24,7 @@ namespace SpaceGame
 
         public void Render(Scene scene)
         {
+            ClearScreen();
             SetCursorPosition();
             AddListForRendering(scene.armyOfEnemies);
             AddListForRendering(scene.ground);
@@ -76,19 +77,21 @@ namespace SpaceGame
 
         public void ClearScreen()
         {
-            StringBuilder stringBuilder = new StringBuilder();
-
             for (int y = 0; y < _screenHeight; y++)
             {
                 for (int x = 0; x < _screenWidth; x++)
                 {
-                    stringBuilder.Append(' ' );
+                    _screenMatrix[y, x] = ' ';
                 }
-                stringBuilder.Append(Environment.NewLine);
             }
-
-            Console.WriteLine(stringBuilder.ToString());
+            SetCursorPosition();
         }
 
+        public void GameOver()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("Game over !");
+            Console.WriteLine(stringBuilder.ToString());
+        }
     }
 }

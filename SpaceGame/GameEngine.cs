@@ -47,9 +47,9 @@ namespace SpaceGame
 
             do
             {
-                _sceneRender.ClearScreen();
                 _sceneRender.Render(_scene);
                 Thread.Sleep(_gameSettings.SpeedOfFrame);
+                _sceneRender.ClearScreen();
 
                 if (enemyArmyCounter==_gameSettings.EnemySpeed)
                 {
@@ -57,9 +57,10 @@ namespace SpaceGame
                     enemyArmyCounter = 0;
                 }
                 enemyArmyCounter++;
-                
 
             } while (_isNotOver);
+            Console.ForegroundColor = ConsoleColor.Red;
+            _sceneRender.GameOver();
         }
 
         public void CalculateMovePlayerLeft()
