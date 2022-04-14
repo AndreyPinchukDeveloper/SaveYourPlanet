@@ -10,6 +10,7 @@ namespace SpaceGame
     {
         public event EventHandler OnAPressed;
         public event EventHandler OnDPressed;
+        public event EventHandler OnSpacePressed;
 
         public void Move()
         {
@@ -21,6 +22,10 @@ namespace SpaceGame
                     OnAPressed?.Invoke(this, new EventArgs());
                 }
                 else if (key.Key.Equals(ConsoleKey.D))
+                {
+                    OnDPressed?.Invoke(this, new EventArgs());
+                }
+                else if (key.Key.Equals(ConsoleKey.Space))
                 {
                     OnDPressed?.Invoke(this, new EventArgs());
                 }

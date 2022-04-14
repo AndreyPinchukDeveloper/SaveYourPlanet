@@ -92,5 +92,14 @@ namespace SpaceGame
                 }
             }
         }
+
+        public void Shot()
+        {
+            PlayerProjectileFactory projectileFactory = new PlayerProjectileFactory(_gameSettings);
+            GameObject projectile = projectileFactory.GetGameObject(_scene.playerShip.GameObjectPlace);
+
+            _scene.playerProjectile.Add(projectile);
+            Console.Beep(1000, 200);
+        }
     }
 }

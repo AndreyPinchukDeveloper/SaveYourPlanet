@@ -15,6 +15,12 @@ namespace SpaceGame
 
         public override GameObject GetGameObject(GameObjectPlace objectPlace)
         {
+            GameObjectPlace projectilelace = new GameObjectPlace()
+            {
+                XCoordinate = objectPlace.XCoordinate,
+                YCoordinate = objectPlace.YCoordinate - 1
+            };
+
             GameObject projectile = new Projectile() 
             { 
                 Figure = GameSettings.PlayerProgectile, 
