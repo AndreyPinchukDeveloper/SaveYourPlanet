@@ -44,6 +44,7 @@ namespace SpaceGame
         public void Run()
         {
             int enemyArmyCounter = 0;
+            int playerProjectileCounter = 0;
 
             do
             {
@@ -57,6 +58,13 @@ namespace SpaceGame
                     enemyArmyCounter = 0;
                 }
                 enemyArmyCounter++;
+
+                if (playerProjectileCounter == _gameSettings.PlayerProgectileSpeed)
+                {
+                    CalculateProjectileMove();
+                    playerProjectileCounter = 0;
+                }
+                playerProjectileCounter++;
 
             } while (_isNotOver);
             Console.ForegroundColor = ConsoleColor.Red;
@@ -100,6 +108,34 @@ namespace SpaceGame
 
             _scene.playerProjectile.Add(projectile);
             Console.Beep(1000, 200);
+        }
+
+        public void CalculateProjectileMove()
+        {
+            if (_scene.playerProjectile.Count == 0)
+            {
+                return;
+            }
+            for (int i = 0; i < _scene.playerProjectile.Count; i++)
+            {
+                GameObject projectile = _scene.playerProjectile[i];
+                if (projectile.GameObjectPlace.YCoordinate == 1)
+                {
+                    _scene.playerProjectile.RemoveAt(i);
+                }
+                projectile.GameObjectPlace.YCoordinate--;
+
+                for (int y = 0; y < _scene.armyOfEnemies.Count; y++)
+                {
+                    GameObject enemyShip = _scene.armyOfEnemies[y];
+                    if (projectile.GameObjectPlace.Equals(enemyShip.GameObjectPlace))
+                    {
+                        _scene.armyOfEnemies.RemoveAt(y);
+                        _scene.playerProjectile.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
         }
     }
 }

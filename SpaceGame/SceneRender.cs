@@ -54,7 +54,7 @@ namespace SpaceGame
             if (y < _screenMatrix.GetLength(0) && x < _screenMatrix.GetLength(1))
             {
                 _screenMatrix[y, x] = gameObject.Figure;
-            }
+             }
             else
             {
                 //_screenMatrix[y, x] = ' ';

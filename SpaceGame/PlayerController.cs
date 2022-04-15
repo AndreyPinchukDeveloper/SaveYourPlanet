@@ -25,9 +25,9 @@ namespace SpaceGame
                 {
                     OnDPressed?.Invoke(this, new EventArgs());
                 }
-                else if (key.Key.Equals(ConsoleKey.Space))
+                else if (key.Key.Equals(ConsoleKey.Spacebar))
                 {
-                    OnDPressed?.Invoke(this, new EventArgs());
+                    OnSpacePressed?.Invoke(this, new EventArgs());
                 }
                 else
                 {
